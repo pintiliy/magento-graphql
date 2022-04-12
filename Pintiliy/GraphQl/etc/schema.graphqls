@@ -1,0 +1,21 @@
+#Custom Module
+type Query
+{
+    GetProductAttributes (
+        productId: Int @doc(description: "Product ID")
+    ): GetProductAttributesOutput @resolver(class: "\\Pintiliy\\GraphQl\\Model\\Resolver\\GetProductAttributes") @doc(description:"Custom Module GetProductAttributes")
+}
+
+type GetProductAttributesOutput
+{
+    attributes: [CustomType]
+}
+
+type CustomType
+{
+    id: Int,
+    name: String,
+    value: String,
+    attribute_code: String,
+    is_searchable: Boolean
+}
