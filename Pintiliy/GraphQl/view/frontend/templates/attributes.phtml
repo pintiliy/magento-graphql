@@ -26,7 +26,7 @@
                     <th class="col label" scope="row"><?= $block->escapeHtml($_data->name) ?></th>
                     <td class="col data" data-th="<?= $block->escapeHtmlAttr($_data->name) ?>">
                         <?php if($_data->is_searchable): ?>
-                            <a href="#"><?=$_data->value ?> IS SEARCHABLE need create normal link</a>
+                            <a href="<?= $block->escapeUrl($block->getSearchUrl($_data->attribute_code, $_data->value)) ?>"><?=$_data->value ?></a>
                         <?php else: ?>
                             <?=$_data->value ?>
                         <?php endif;?>

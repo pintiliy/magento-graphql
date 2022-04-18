@@ -15,6 +15,9 @@ use Magento\Catalog\Model\Product;
 use Magento\Framework\Phrase;
 use Magento\Framework\Pricing\PriceCurrencyInterface;
 use Magento\Framework\HTTP\Client\Curl;
+use Magento\Framework\UrlInterface;
+use Magento\Framework\App\ObjectManager;
+use \Magento\Store\Model\StoreManagerInterface;
 /**
  * Attributes attributes block
  *
@@ -76,5 +79,13 @@ class Attributes extends \Magento\Catalog\Block\Product\View\Attributes
 
         return json_decode($result)->data->GetProductAttributes->attributes;
         
+    }
+
+    public function getSearchUrl($name, $value)
+    {
+        $objectManager = ObjectManager::getInstance();
+        $storeManager = $objectManager->get(StoreManagerInterface::class);
+        $url = $storeManager->getStore()->getUrl('catalogsearch/result/index', ['_query' => [$name => $value]]);
+        return $url;
     }
 }
