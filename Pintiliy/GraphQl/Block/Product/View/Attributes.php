@@ -76,9 +76,11 @@ class Attributes extends \Magento\Catalog\Block\Product\View\Attributes
 
         $this->curl->get("$endpoint?$data");
         $result = $this->curl->getBody();
-
-        return json_decode($result)->data->GetProductAttributes->attributes;
-        
+        $resultObject = json_decode($result);
+        if (isset($resultObject->data)) {
+            return json_decode($result)->data->GetProductAttributes->attributes;
+        }
+        return [];
     }
 
     public function getSearchUrl($name, $value)
